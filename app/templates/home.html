@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
+{% block content%}
+<style>
+    .body{
+    /* The image used */
+    background-color: black;
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+</style>
+<body class ="body">
+    {%for category_list in category%}
+    <div class = "container">
+        <h2 class="display-3" styles = "color:white">{{category_list.category}}</h2>
+        <div class = "row g-3">
+            {% for video_list in catalogue%}
+            {% if category_list.category == video_list.video.category%}
+            <div class = "col-12 col-md-6 col-lg-4" >
+                <div class = "card">
+                    <img src="http://172.31.44.188/pics/{{video_list.video.pic}}" alt="{{video_list.video.Name}}" class="card-img-top" style="Height:500px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{video_list.video.Name}}</h5>
+                        <p class="card-text">{{video_list.video.desc}}</p>
+                        <a href = "/{{video_list.video.uuid}}" class="btn btn-primary btn-lg btn-block" role="button">Watch</a>
+                    </div> 
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+    </div>
+    {% endfor %}
+</body>
+{% endblock %}

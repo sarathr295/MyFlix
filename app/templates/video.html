@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Watch Video{% endblock %} 
+{% block content%}
+{% for vid_list in video%}
+<style>
+    .body{
+    /* The image used */
+    background-image: url("http://172.31.44.188/pics/{{vid_list.video.pic}}");
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+</style>
+<body class = "body">
+    <div class="container" style = "padding-left: 200px; padding-top: 50px">
+        <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="400px"
+            controls preload="none" poster="http://172.31.44.188/pics/{{vid_list.video.pic}}"
+            data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+            <source src="http://172.31.44.188/pics/{{vid_list.video.file}}" type='video/mp4'/>
+        
+        </video>
+        <h2 class="display-3" style = "color:rgba(255, 255, 255, 0.532)">Related Videos</h2>
+        {% for video_list in cat %}
+        {% if vid_list.video.uuid != video_list.video.uuid%}
+        <div class = "row g-3">
+            <div class = "col-4 d-flex justify-content-center">
+                <div class = "card">
+                    <a href = "/{{video_list.video.uuid}}">
+                        <img src="http://172.31.44.188/pics/{{video_list.video.pic}}" alt="{{video_list.video.Name}}" class="card-img-top" style = "height: 300px; width: 300px;">
+                    </a> 
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+{%endfor%}
+{% endblock %}
