@@ -19,7 +19,7 @@ def home():
       return "Unexpected response: {0}. Status: {1}. Message: {2}".format(resp1.reason, resp1.status, jresp1['Exception']['Message'])
     jresp1 = resp1.json()
                 
-    url2 = "http://ec2-54-198-76-97.compute-1.amazonaws.com/myflix/categories"
+    url2 = "http://44.220.0.123/myflix/categories"
     resp2 = requests.get(url2)
     if resp2.status_code != 200:
       print("Unexpected response: {0}. Status: {1}. Message: {2}".format(resp2.reason, resp2.status, jresp2['Exception']['Message']))
@@ -32,7 +32,7 @@ def home():
 @login_required
 def video_page(video):
   
-  url = 'http://ec2-54-198-76-97.compute-1.amazonaws.com/myflix/videos?filter={"video.uuid":"'+video+'"}'
+  url = 'http://44.220.0.123/myflix/videos?filter={"video.uuid":"'+video+'"}'
   response = requests.get(url)
   if response.status_code != 200:
     print("Unexpected response: {0}. Status: {1}. Message: {2}".format(response.reason, response.status, jResp['Exception']['Message']))
@@ -44,7 +44,7 @@ def video_page(video):
         for key2 in index[key]:
           if (key2 == "category"):
             category = index[key][key2]
-  url2= 'http://ec2-54-198-76-97.compute-1.amazonaws.com/myflix/videos?filter={"video.category":"'+category+'"}'
+  url2= 'http://44.220.0.123/myflix/videos?filter={"video.category":"'+category+'"}'
   response2 = requests.get(url2)
   jResp2 = response2.json()
   return render_template("video.html", user = current_user, video = jResp,cat = jResp2)
