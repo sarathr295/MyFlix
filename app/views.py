@@ -12,7 +12,7 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     
-    url1 = "http://ec2-54-198-76-97.compute-1.amazonaws.com/myflix/videos"
+    url1 = "http://44.220.0.123/myflix/videos"
     resp1 = requests.get(url1)
     if resp1.status_code != 200:
       print("Unexpected response: {0}. Status: {1}. Message: {2}".format(resp1.reason, resp1.status, jresp1['Exception']['Message']))
